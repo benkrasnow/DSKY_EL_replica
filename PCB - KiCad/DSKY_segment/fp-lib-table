@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name DSKY_V2)(type KiCad)(uri ${KIPRJMOD}/DSKY_V2.pretty)(options "")(descr ""))
+)
