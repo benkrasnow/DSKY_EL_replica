@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name DSKY_driver)(type KiCad)(uri ${KIPRJMOD}/DSKY_driver.pretty)(options "")(descr ""))
+)

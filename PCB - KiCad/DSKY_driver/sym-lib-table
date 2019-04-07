@@ -1,0 +1,8 @@
+(sym_lib_table
+  (lib (name EL_driver_multi-rescue)(type Legacy)(uri ${KIPRJMOD}/EL_driver_multi-rescue.lib)(options "")(descr ""))
+  (lib (name Trinket_M0_rev_D-eagle-import)(type Legacy)(uri ${KIPRJMOD}/Trinket_M0_rev_D-eagle-import.lib)(options "")(descr ""))
+  (lib (name usb_micro)(type Legacy)(uri ${KIPRJMOD}/usb_micro.lib)(options "")(descr ""))
+  (lib (name cui_power_jack)(type Legacy)(uri ${KIPRJMOD}/cui_power_jack.lib)(options "")(descr ""))
+  (lib (name DSKY_driver)(type Legacy)(uri ${KIPRJMOD}/DSKY_driver.lib)(options "")(descr ""))
+  (lib (name DSKY_driver-cache)(type Legacy)(uri ${KIPRJMOD}/DSKY_driver-cache.lib)(options "")(descr ""))
+)
