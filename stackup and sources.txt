@@ -1,0 +1,28 @@
+Display stackup:
+
+1.  ITO-coated glass (1.1mm thick) :  https://www.ebay.com/itm/401338724836
+(clean thoroughly in acetone and then IPA)
+
+2.  Screen-printed silver epoxy dots (originally provided the common electrode connection, but just decorative here).  This could be replaced by lots of other things.
+		https://www.amazon.com/MG-Chemicals-Two-Part-Conductive-Adhesive/dp/B003BDMJSY
+
+3.  Screen-printed black epoxy lettering ("NOUN", "VERB", etc)
+		https://www.mclogan.com/shop/nazdar-ade-series-epoxy-screen-ink-p-1145.html
+		ADE-52 Opaque black
+
+4.  Sprayed layer of Lumilor green phosphor mixed with a dash of black pigment
+		https://www.coastairbrush.com/proddetail.asp?prod=Lumilor_LumiColor_4oz&cat=386
+		https://www.amazon.com/gp/product/B000AP6OHI
+
+5.  Sprayed layer of Lumilor dielectric
+		https://www.coastairbrush.com/proddetail.asp?prod=Lumilor_Dielectric_4oz&cat=386
+
+6.  Screen printed conductive paint to define display segments
+		https://www.amazon.com/gp/product/B007R9UMXM
+
+7.  3M 9703 electrically conductive adhesive transfer tape (anisotropically conductive, or "Z tape")
+		https://www.amazon.com/gp/product/B00HDDR19U
+
+8.  DSKY_SEG  PCB with copper traces to match segment positions
+		Currently, the common electrode (ITO) is connected to the PCB by scratching away a tiny bit of the paint at the border
+		and using magnet wire and conductive epoxy to connect it electrically.
