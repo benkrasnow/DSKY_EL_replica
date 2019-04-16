@@ -13,6 +13,7 @@ Display stackup:
 4.  Sprayed layer of Lumilor green phosphor mixed with a dash of black pigment
 		https://www.coastairbrush.com/proddetail.asp?prod=Lumilor_LumiColor_4oz&cat=386
 		https://www.amazon.com/gp/product/B000AP6OHI
+		Spray gun (the smaller one) https://www.amazon.com/gp/product/B01G61DNF0
 
 5.  Sprayed layer of Lumilor dielectric
 		https://www.coastairbrush.com/proddetail.asp?prod=Lumilor_Dielectric_4oz&cat=386
@@ -26,3 +27,21 @@ Display stackup:
 8.  DSKY_SEG  PCB with copper traces to match segment positions
 		Currently, the common electrode (ITO) is connected to the PCB by scratching away a tiny bit of the paint at the border
 		and using magnet wire and conductive epoxy to connect it electrically.
+
+
+
+
+
+Screen printing supplies:
+
+Pre-stretched screen: https://www.mclogan.com/shop/aluminum-12x17-p-1173-c-293_297_379_3.html
+Squeegee: https://www.mclogan.com/shop/squeegees-per-inch-durometer-p-5-c-293_297_1_4.html
+Epoxy paint: https://www.mclogan.com/shop/nazdar-ade-series-epoxy-screen-ink-p-1145.html
+Paint cleaner: https://www.mclogan.com/shop/mclogan-graphic-press-wash-p-156.html
+Emulsion remover: https://www.mclogan.com/shop/mclogan-emulsion-remover-concentrate-p-149-c-187_42_44.html
+Degreaser: https://www.atlasscreensupply.com/store/p/163-ICC-858-Stain-Remover/Degreaser-Quart.aspx
+Film emulsion: https://www.atlasscreensupply.com/store/p/772-DuraCap-11-x-14.aspx
+Vellum paper: https://www.amazon.com/Office-Depot-Premium-Translucent-Vellum/dp/B014SBHGMQ/
+
+How-to video:  https://www.youtube.com/watch?v=NS8Q9LUIKA8
+
