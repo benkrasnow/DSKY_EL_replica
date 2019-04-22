@@ -1,4 +1,4 @@
-update=4/6/2019 11:36:33 PM
+update=4/21/2019 9:23:53 PM
 version=1
 last_client=kicad
 [general]
@@ -12,6 +12,16 @@ NetIExt=net
 version=1
 LibDir=
 [eeschema/libraries]
+[schematic_editor]
+version=1
+PageLayoutDescrFile=empty.kicad_wks
+PlotDirectoryName=
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=Pcbnew
+SpiceAjustPassiveValues=0
+LabSize=50
+ERC_TestSimilarLabels=1
 [pcbnew]
 version=1
 PageLayoutDescrFile=
@@ -32,6 +42,7 @@ TrackWidth1=0.2
 TrackWidth2=0.4
 TrackWidth3=0.5
 TrackWidth4=1
+TrackWidth5=2
 ViaDiameter1=0.508
 ViaDrill1=0.254
 ViaDiameter2=1
@@ -40,15 +51,15 @@ dPairWidth1=0.2
 dPairGap1=0.25
 dPairViaGap1=0.25
 SilkLineWidth=0.15
-SilkTextSizeV=1
-SilkTextSizeH=1
-SilkTextSizeThickness=0.15
+SilkTextSizeV=0.75
+SilkTextSizeH=0.75
+SilkTextSizeThickness=0.09999999999999999
 SilkTextItalic=0
 SilkTextUpright=1
 CopperLineWidth=0.15
 CopperTextSizeV=1
 CopperTextSizeH=1
-CopperTextThickness=0.3
+CopperTextThickness=0.09999999999999999
 CopperTextItalic=0
 CopperTextUpright=1
 EdgeCutLineWidth=0.15
@@ -62,20 +73,10 @@ OthersTextUpright=1
 SolderMaskClearance=0.2
 SolderMaskMinWidth=0.25
 SolderPasteClearance=0
-SolderPasteRatio=0
+SolderPasteRatio=-0
 [pcbnew/Layer.F.Cu]
 Name=Top
 Type=0
 [pcbnew/Layer.B.Cu]
 Name=Bottom
 Type=0
-[schematic_editor]
-version=1
-PageLayoutDescrFile=empty.kicad_wks
-PlotDirectoryName=
-SubpartIdSeparator=0
-SubpartFirstId=65
-NetFmtName=Pcbnew
-SpiceAjustPassiveValues=0
-LabSize=50
-ERC_TestSimilarLabels=1
