@@ -13,7 +13,7 @@
 #define USE_UNIPOLAR_DRIVE
 
 
-#define SR_TIMER 8000   //  This value determines how often the EL display is refreshed.  The refresh rate is 12MHz/SR_TIMER.  Example:   12MHz/18500 = 648 Hz
+#define SR_TIMER 4000   //  This value determines how often the EL display is refreshed.  The refresh rate is 12MHz/SR_TIMER.  Example:   12MHz/18500 = 648 Hz
                          //  Higher refresh rates will create a brighter, and more blue-colored display
                          //  The DSKY project needed a more-green phosphor, so I've adjusted the refresh rate much lower than used on other projects (8KHz) to make the display as green as possible
 
@@ -35,6 +35,7 @@
 #define SR_BYTES 24
 #endif
 
+const char packet_start_char = '[';
 
 // Each bit indicates if this electrode is common (1 = common, 0 = segment)   
 //const uint8_t com_electrode_mask[SR_BYTES] = {  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,   
@@ -57,7 +58,7 @@ const uint8_t seg_lookup[TOTAL_DISP_CHAR][7] =
         {156,151,149,144,150,155,157},
         {141,116,113,112,143,142,111},  //4   //NOUN two  digits
         {139,122,121,119,118,140,120},
-        {158,98,158,158,158,158,104},        //6 upper plus/minus  (it's not efficient to use a whole byte for just plus/minus, but creates character consistency and more readable code. a=minus, b=plus.  
+        {158,98,158,158,158,158,104},        //6 upper plus/minus  (it's not efficient to use a whole byte for just plus/minus, but creates character consistency and more readable code. The seven-seg decoder function accepts '+' and '-'  
         {107,103,101,99,105,106,102},         //upper-most row of five digits
         {108,110,82,86,90,100,83},  //8
         {117,123,69,77,78,114,76},
@@ -87,9 +88,10 @@ int pixelvalues[NUM_PIXELS];  //Range is 0 (off) to MAX_BRIGHTNESS.  Originally,
                               //This variable is global, and is the only way pathway that graphics drawing functions can affect the shift register ISR
 SPISettings SPI_HV507(6000000, MSBFIRST, SPI_MODE0);  //8MHz limit for HV507.  It's global so that it can be located at the top of the code here for easy access, but is only used in the shift register ISR.
 
-int demo_mode = 0;  // Device boots in "attract mode" light show.  When it first receives a byte via USB serial interface, it cancels attract mode and is controlled only via USB.  Or, set this to zero to never use attract mode.
+int demo_mode = 1;  // Device boots in "attract mode" light show.  When it first receives a byte via USB serial interface, it cancels attract mode and is controlled only via USB.  Or, set this to zero to never use attract mode.
 
-//-----------------------------------------End of user control constants and variables
+
+//-----------------------------------------End of user control constants and variables ------------------------------------------------------------------------
 
 
 
@@ -210,55 +212,52 @@ void setup()
 
 
 void loop() {
-int i;
 static int char_pos = 0;
 
 //used only for demo mode
-static int demo_pos = 0;
 static int demo_val = MAX_BRIGHTNESS;
-
-
-
-
-
+static int i, j;
 
 if (demo_mode == 1)
   {
     //test all segments
- //   pixelvalues[demo_pos] = demo_val;
- //   demo_pos = (++demo_pos == NUM_PIXELS) ? 0 : demo_pos;
-//    if (demo_pos == 0)
- //     {
- //       demo_val = (demo_val == 0) ? MAX_BRIGHTNESS : 0;
-  //    }
-  //  Serial.println(demo_pos);
-  //  delay(100);
-
-
-for(i = 0; i< NUM_PIXELS; i++)
-  {
-    pixelvalues[i] = MAX_BRIGHTNESS;
-    if(i > 0)
+    pixelvalues[seg_lookup[i][j]] = demo_val;
+    j = (++j == 7) ? 0 : j;
+    if (j == 0)
       {
-        pixelvalues[i-1] = 0;
+        i = (++i == TOTAL_DISP_CHAR) ? 0 : i;
       }
-      Serial.println(i);
-      while(!Serial.available());
-      Serial.read();     
-  }
 
-  
-  
+     if ( i == 0 && j == 0)
+          {
+            demo_val = (demo_val == 0) ? MAX_BRIGHTNESS : 0;
+          }
+    delay(30);
+    Serial.print(i);
+    Serial.print("  ");
+    Serial.println(j);
+    
+    if (Serial.available())
+      {
+        demo_mode = 0;
+      }
  }
 
 else
   {
     while(Serial.available())
     {
-      
-      DSKY_set_char(char_pos,Serial.read(),MAX_BRIGHTNESS);
-      char_pos = (++char_pos == TOTAL_DISP_CHAR) ? 0 : char_pos;
-      demo_mode = 0;
+      char tmpchar = Serial.read();
+      if (tmpchar == packet_start_char)
+        {
+          char_pos = 0;
+        }
+      else
+        {  
+          DSKY_set_char(char_pos,tmpchar,MAX_BRIGHTNESS);
+          char_pos = (++char_pos == TOTAL_DISP_CHAR) ? 0 : char_pos;
+          demo_mode = 0;
+        }
     }
     delay(5);
   }
