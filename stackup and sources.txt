@@ -21,12 +21,14 @@ Display stackup:
 6.  Screen printed conductive paint to define display segments
 		https://www.amazon.com/gp/product/B007R9UMXM
 
-7.  3M 9703 electrically conductive adhesive transfer tape (anisotropically conductive, or "Z tape")
+7 (alternative choice).  3M 9703 electrically conductive adhesive transfer tape (anisotropically conductive, or "Z tape")
 		https://www.amazon.com/gp/product/B00HDDR19U
+
+7 (primary choice).  MG Chemicals 8331 conductive epoxy pre-mixed and screen-printed or dispensed via syringe to fit within segment outlines.
 
 8.  DSKY_SEG  PCB with copper traces to match segment positions
 		Currently, the common electrode (ITO) is connected to the PCB by scratching away a tiny bit of the paint at the border
-		and using magnet wire and conductive epoxy to connect it electrically.
+		and using magnet wire and conductive epoxy (MG 8331) to connect it electrically.
 
 
 
