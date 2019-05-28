@@ -1,4 +1,6 @@
 #include <SPI.h>
+#include <Arduino.h>
+#include "wiring_private.h">
 
 //Pin definitions
 #define PIN_SPI_DAT 4  //Using hardware SPI.  Pins are defined here just for completeness
@@ -102,6 +104,14 @@ int op_mode = 3;  // 1 = boot in "attract mode" light show mode.  Upon receiving
 //-----------------------------------------End of user control constants and variables ------------------------------------------------------------------------
 
 
+Uart Serial2 (&sercom1, 23, 24, SERCOM_RX_PAD_1, UART_TX_PAD_2);
+
+void SERCOM1_Handler()
+  {
+    Serial2.IrqHandler();
+  }
+
+
 
 
 void setup() 
@@ -187,7 +197,7 @@ void setup()
   TCC2->INTENSET.reg = TCC_INTENSET_OVF;
   
   NVIC_EnableIRQ(TCC2_IRQn);
-  NVIC_SetPriority(TCC2_IRQn, 1);
+  NVIC_SetPriority(TCC2_IRQn, 2);
   
   REG_TCC2_CTRLA |= TCC_CTRLA_PRESCALER_DIV16 |    // Divide GCLK4 by 16  48MHz/16 = 3MHz
                     TCC_CTRLA_ENABLE;             // Enable the TCC2 output
@@ -210,7 +220,13 @@ void setup()
 
   Serial.begin(9600);
 
+  Serial2.begin(19200);
+  pinPeripheral(23, PIO_SERCOM);
+  pinPeripheral(24, PIO_SERCOM);
+
   delay(100);
+  
+  NVIC_SetPriority(SERCOM1_IRQn,0);
   
 }
 
@@ -258,7 +274,7 @@ if (op_mode == 1)
     Serial.print("  ");
     Serial.println(j);
     
-    if (Serial.available())
+    if (Serial.available() || Serial2.available())
       {
         op_mode = 0;
       }
@@ -332,11 +348,12 @@ else if (op_mode == 3)
             DSKY_set_char(i,tmpStr[i],MAX_BRIGHTNESS);
           }
       
-    if (Serial.available())
+    if (Serial.available() || Serial2.available())
       {
         op_mode = 0;
       }
     delay(10);
+    
   }
 
 
@@ -358,6 +375,24 @@ else // op_mode == 0 or some unknown setting
           op_mode = 0;
         }
     }
+
+
+      while(Serial2.available())
+          {
+            char tmpchar = Serial2.read();
+            if (tmpchar == packet_start_char)
+              {
+                char_pos = 0;
+              }
+            else
+              {  
+                DSKY_set_char(char_pos,tmpchar,MAX_BRIGHTNESS);
+                char_pos = (++char_pos == TOTAL_DISP_CHAR) ? 0 : char_pos;
+                op_mode = 0;
+              }
+          }
+
+    
     delay(5);
   }
 }
@@ -408,7 +443,7 @@ void TCC1_Handler()
                       }
                }       
          
-            __disable_irq();
+          //  __disable_irq();
    
              #ifdef USE_HV507
             
@@ -424,7 +459,7 @@ void TCC1_Handler()
                 digitalWriteDirect(PIN_SPI_LE, HIGH);
                 digitalWriteDirect(PIN_SPI_LE, LOW);
              #endif
-            __enable_irq();
+          //  __enable_irq();
 
           
           
@@ -448,7 +483,7 @@ void TCC1_Handler()
   fade_step = (fade_step == MAX_BRIGHTNESS) ? 1 : fade_step + 1;
 
 
-   __disable_irq();
+//   __disable_irq();
    
  #ifdef USE_HV507
 
@@ -469,7 +504,7 @@ void TCC1_Handler()
  NVIC_ClearPendingIRQ(TCC1_IRQn);
 
    digitalWriteDirect(PIN_RED_LED, LOW);
-   __enable_irq();
+ //  __enable_irq();
 }
 
 
